@@ -108,6 +108,7 @@ GameState.prototype.update = function() {
     G.ground.forEachAlive(function(ground) {
         if (this.game.math.distance(G.drill.x, G.drill.y, ground.x, ground.y) < G.blockWidth) {
             if (!ground.animations.getAnimation('crush').isPlaying) {
+                ground.tween = this.game.add.tween(ground).to({ alpha: 0 }, 180, Phaser.Easing.Cubic.In, true);
                 ground.animations.play('crush');
             }
         }
@@ -141,6 +142,7 @@ GameState.prototype.addMoreGround = function() {
             }
             ground.reset(x, y);
             ground.frame = 0;
+            ground.alpha = 1;
             ground.revive();
         }
     }
