@@ -1,7 +1,7 @@
 var G = {
     game: null,
-    width: 800, /* stage width in pixels */
-    height: 450, /* stage height in pixels */
+    width: 832, /* stage width in pixels */
+    height: 448, /* stage height in pixels */
 
     blockHeight: 64,
     blockWidth: 64,
@@ -10,6 +10,8 @@ var G = {
 
     message: null,
     tutorial: {},
+
+    depth: 0,
 
     backgroundColor: 0x4488cc,
     mainFont: '"Luckiest Guy"'
