@@ -3,6 +3,9 @@ var G = {
     width: 800, /* stage width in pixels */
     height: 450, /* stage height in pixels */
 
+    blockHeight: 64,
+    blockWidth: 64,
+
     sfx: {}, /* sound effects */
 
     message: null,

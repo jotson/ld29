@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64"
+   height="64"
+   id="svg3915"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="drill.svg"
+   inkscape:export-filename="/mnt/data/docs/code/games/ld29/game/assets/gfx/drill.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs3917" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="10.043126"
+     inkscape:cx="18.657541"
+     inkscape:cy="33.891841"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1855"
+     inkscape:window-height="1056"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3920">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-988.36218)">
+    <g
+       transform="translate(-525.86799,294.42904)"
+       id="g3869">
+      <rect
+         y="693.93317"
+         x="525.86798"
+         height="64"
+         width="64"
+         id="rect3837"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+      <rect
+         y="697.93317"
+         x="525.86798"
+         height="8"
+         width="4"
+         id="rect3839"
+         style="fill:#4488cc;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+      <rect
+         style="fill:#4488cc;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect3847"
+         width="4"
+         height="8"
+         x="539.86798"
+         y="711.93317" />
+      <rect
+         style="fill:#4488cc;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect3851"
+         width="4"
+         height="8"
+         x="585.86798"
+         y="727.93317" />
+      <rect
+         y="733.93317"
+         x="531.86798"
+         height="8"
+         width="4"
+         id="rect3853"
+         style="fill:#4488cc;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+      <rect
+         style="fill:#4488cc;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect3855"
+         width="4"
+         height="8"
+         x="555.86798"
+         y="725.93317" />
+      <rect
+         y="693.93317"
+         x="559.86798"
+         height="8"
+         width="4"
+         id="rect3857"
+         style="fill:#4488cc;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+      <rect
+         style="fill:#4488cc;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect3859"
+         width="4"
+         height="8"
+         x="543.86798"
+         y="749.93317" />
+      <rect
+         y="741.93317"
+         x="569.86798"
+         height="8"
+         width="4"
+         id="rect3861"
+         style="fill:#4488cc;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+      <rect
+         style="fill:#4488cc;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect3867"
+         width="4"
+         height="8"
+         x="573.86798"
+         y="707.93317" />
+    </g>
+  </g>
+</svg>

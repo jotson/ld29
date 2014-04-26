@@ -1,4 +1,4 @@
-var DEBUG_PRELOADER = false;
+var DEBUG_PRELOADER = true;
 if (DEBUG_PRELOADER) {
     Phaser.Loader.prototype.originalNextFile = Phaser.Loader.prototype.nextFile;
 
@@ -31,9 +31,8 @@ PreloadState.prototype.preload = function() {
     this.game.load.onFileComplete.add(this.fileLoaded, this);
 
     // Load assets
-    // this.game.load.image('guts', 'assets/gfx/guts.png');
-    // this.game.load.spritesheet('zombie', 'assets/gfx/zombie.png', 20, 20);
-    // this.game.load.audio('rifle1', ['assets/sfx/rifle1.ogg', 'assets/sfx/rifle1.mp3']);
+    this.game.load.image('ground', 'assets/gfx/ground.png');
+    this.game.load.spritesheet('drill', 'assets/gfx/drill.png', 64, 64);
 };
 
 PreloadState.prototype.create = function() {
@@ -44,11 +43,9 @@ PreloadState.prototype.create = function() {
 
     // G.sfx.boom = this.game.add.sound('boom', 1.0);
 
-    if (!DEBUG_PRELOADER) {
-        // Delay to allow web fonts to load
-        G.fadeOut(1000, G.backgroundColor);
-        this.game.time.events.add(1000, function() { this.game.state.start('menu'); }, this);
-    }
+    // Delay to allow web fonts to load
+    G.fadeOut(1000, G.backgroundColor);
+    this.game.time.events.add(1000, function() { this.game.state.start('menu'); }, this);
 };
 
 PreloadState.prototype.update = function() {
