@@ -19,6 +19,8 @@ var G = {
 
 G.setupStage = function() {
     G.game.stage.backgroundColor = G.backgroundColor;
+
+    G.game.world.setBounds(0, 0, G.game.width, 1000 * G.blockHeight);
 };
 
 G.addRectangle = function(color) {
