@@ -9,52 +9,6 @@ GameState.prototype.create = function() {
 };
 
 GameState.prototype.resetGame = function() {
-    var tweenTime = 500;
-    var delay = 0;
-    var delayIncrement = 100;
-    var t;
-
-    // Instructions
-    t = this.game.add.text(0, -100, 'DIG!', { font: '60px ' + G.mainFont, fill: '#ffffff' });
-    t.updateTransform();
-    t.x = this.game.width/2 - t.getBounds().width/2;
-    t.alpha = 0;
-    this.game.add.tween(t).to({ y: 40 }, tweenTime, Phaser.Easing.Elastic.Out, true, delay).to({ y: -100 }, tweenTime, Phaser.Easing.Cubic.In, true, tweenTime*3);
-    this.game.add.tween(t).to({ alpha: 1 }, tweenTime, Phaser.Easing.Sinusoidal.InOut, true, delay);
-    delay += delayIncrement;
-
-    t = this.game.add.text(0, -100, 'Use arrow keys to dig.', { font: '40px ' + G.mainFont, fill: '#ffffff', align: 'center' });
-    t.updateTransform();
-    t.x = this.game.width/2 - t.getBounds().width/2;
-    t.alpha = 0;
-    this.game.add.tween(t).to({ y: 100 }, tweenTime, Phaser.Easing.Elastic.Out, true, delay).to({ y: -100 }, tweenTime, Phaser.Easing.Cubic.In, true, tweenTime*3);
-    this.game.add.tween(t).to({ alpha: 1 }, tweenTime, Phaser.Easing.Sinusoidal.InOut, true, delay);
-    delay += delayIncrement * 25;
-
-    t = this.game.add.text(0, -100, 'Avoid magma!', { font: '40px ' + G.mainFont, fill: '#ffffff', align: 'center' });
-    t.updateTransform();
-    t.x = this.game.width/2 - t.getBounds().width/2;
-    t.alpha = 0;
-    this.game.add.tween(t).to({ y: 40 }, tweenTime, Phaser.Easing.Elastic.Out, true, delay).to({ y: -100 }, tweenTime, Phaser.Easing.Cubic.In, true, tweenTime*3);
-    this.game.add.tween(t).to({ alpha: 1 }, tweenTime, Phaser.Easing.Sinusoidal.InOut, true, delay);
-    delay += delayIncrement;
-
-    t = this.game.add.text(0, -100, 'Avoid monsters!', { font: '40px ' + G.mainFont, fill: '#ffffff', align: 'center' });
-    t.updateTransform();
-    t.x = this.game.width/2 - t.getBounds().width/2;
-    t.alpha = 0;
-    this.game.add.tween(t).to({ y: 90 }, tweenTime, Phaser.Easing.Elastic.Out, true, delay).to({ y: -100 }, tweenTime, Phaser.Easing.Cubic.In, true, tweenTime*3);
-    this.game.add.tween(t).to({ alpha: 1 }, tweenTime, Phaser.Easing.Sinusoidal.InOut, true, delay);
-    delay += delayIncrement;
-
-    t = this.game.add.text(0, -100, 'GO DEEP!', { font: '40px ' + G.mainFont, fill: '#ffffff', align: 'center' });
-    t.updateTransform();
-    t.x = this.game.width/2 - t.getBounds().width/2;
-    t.alpha = 0;
-    this.game.add.tween(t).to({ y: 140 }, tweenTime, Phaser.Easing.Elastic.Out, true, delay).to({ y: -100 }, tweenTime, Phaser.Easing.Cubic.In, true, tweenTime*3);
-    this.game.add.tween(t).to({ alpha: 1 }, tweenTime, Phaser.Easing.Sinusoidal.InOut, true, delay);
-    delay += delayIncrement;
-
     // Define vertical center of screen
     this.middle = G.blockHeight * 3.5;
 
@@ -71,10 +25,68 @@ GameState.prototype.resetGame = function() {
     G.drill.animations.play('right');
     this.game.physics.enable(G.drill, Phaser.Physics.ARCADE);
 
+    // Instructions
+    this.showInstructions();
+
     // Add score
     G.depth = 0;
     G.depthText = this.game.add.text(10, 10, 'Depth: 0', { font: '24px ' + G.mainFont, fill: '#ffffff', stroke: '#4488cc', strokeThickness: 10 });
     G.depthText.fixedToCamera = true;
+};
+
+GameState.prototype.showInstructions = function() {
+    var tweenTime = 500;
+    var delay = 0;
+    var delayIncrement = 100;
+    var t;
+
+    var instructions = this.game.add.group();
+    instructions.fixedToCamera = true;
+
+    t = this.game.add.text(0, -100, 'DIG!', { font: '60px ' + G.mainFont, fill: '#ffffff', stroke: '#4488cc', strokeThickness: 10 });
+    instructions.add(t);
+    t.updateTransform();
+    t.x = this.game.width/2 - t.getBounds().width/2;
+    t.alpha = 0;
+    this.game.add.tween(t).to({ y: 40 }, tweenTime, Phaser.Easing.Elastic.Out, true, delay).to({ y: -100 }, tweenTime, Phaser.Easing.Cubic.In, true, tweenTime*3);
+    this.game.add.tween(t).to({ alpha: 1 }, tweenTime, Phaser.Easing.Sinusoidal.InOut, true, delay);
+    delay += delayIncrement;
+
+    t = this.game.add.text(0, -100, 'Use arrow keys to dig.', { font: '40px ' + G.mainFont, fill: '#ffffff', align: 'center', stroke: '#4488cc', strokeThickness: 10 });
+    instructions.add(t);
+    t.updateTransform();
+    t.x = this.game.width/2 - t.getBounds().width/2;
+    t.alpha = 0;
+    this.game.add.tween(t).to({ y: 100 }, tweenTime, Phaser.Easing.Elastic.Out, true, delay).to({ y: -100 }, tweenTime, Phaser.Easing.Cubic.In, true, tweenTime*3);
+    this.game.add.tween(t).to({ alpha: 1 }, tweenTime, Phaser.Easing.Sinusoidal.InOut, true, delay);
+    delay += delayIncrement * 25;
+
+    t = this.game.add.text(0, -100, 'Avoid magma!', { font: '40px ' + G.mainFont, fill: '#ffffff', align: 'center', stroke: '#4488cc', strokeThickness: 10 });
+    instructions.add(t);
+    t.updateTransform();
+    t.x = this.game.width/2 - t.getBounds().width/2;
+    t.alpha = 0;
+    this.game.add.tween(t).to({ y: 40 }, tweenTime, Phaser.Easing.Elastic.Out, true, delay).to({ y: -100 }, tweenTime, Phaser.Easing.Cubic.In, true, tweenTime*3);
+    this.game.add.tween(t).to({ alpha: 1 }, tweenTime, Phaser.Easing.Sinusoidal.InOut, true, delay);
+    delay += delayIncrement;
+
+    t = this.game.add.text(0, -100, 'Avoid monsters!', { font: '40px ' + G.mainFont, fill: '#ffffff', align: 'center', stroke: '#4488cc', strokeThickness: 10 });
+    instructions.add(t);
+    t.updateTransform();
+    t.x = this.game.width/2 - t.getBounds().width/2;
+    t.alpha = 0;
+    this.game.add.tween(t).to({ y: 90 }, tweenTime, Phaser.Easing.Elastic.Out, true, delay).to({ y: -100 }, tweenTime, Phaser.Easing.Cubic.In, true, tweenTime*3);
+    this.game.add.tween(t).to({ alpha: 1 }, tweenTime, Phaser.Easing.Sinusoidal.InOut, true, delay);
+    delay += delayIncrement;
+
+    t = this.game.add.text(0, -100, 'GO DEEP!', { font: '40px ' + G.mainFont, fill: '#ffffff', align: 'center', stroke: '#4488cc', strokeThickness: 10 });
+    instructions.add(t);
+    t.updateTransform();
+    t.x = this.game.width/2 - t.getBounds().width/2;
+    t.alpha = 0;
+    this.game.add.tween(t).to({ y: 140 }, tweenTime, Phaser.Easing.Elastic.Out, true, delay).to({ y: -100 }, tweenTime, Phaser.Easing.Cubic.In, true, tweenTime*3);
+    this.game.add.tween(t).to({ alpha: 1 }, tweenTime, Phaser.Easing.Sinusoidal.InOut, true, delay);
+    delay += delayIncrement;
 };
 
 GameState.prototype.update = function() {
