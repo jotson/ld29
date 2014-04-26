@@ -55,19 +55,19 @@ GameState.prototype.resetGame = function() {
     this.game.add.tween(t).to({ alpha: 1 }, tweenTime, Phaser.Easing.Sinusoidal.InOut, true, delay);
     delay += delayIncrement;
 
-    // Create drill
-    G.drill = this.game.add.sprite(G.blockWidth, G.blockHeight * 2.5, 'drill');
-    G.drill.anchor.setTo(0.5, 0.5);
-    this.game.physics.enable(G.drill, Phaser.Physics.ARCADE);
-
     // Create ground
     G.ground = this.game.add.group();
-    for(var x = G.blockWidth/2; x < this.game.width; x += G.blockWidth) {
+    for(var x = G.blockWidth * 0.5; x < this.game.width; x += G.blockWidth) {
         for(var y = G.blockHeight * 3.5; y < this.game.height; y += G.blockHeight) {
             var ground = this.game.add.image(x, y, 'ground', 0, G.ground);
             ground.anchor.setTo(0.5, 0.5);
         }
     }
+
+    // Create drill
+    G.drill = this.game.add.sprite(G.blockWidth * 1.5, G.blockHeight * 2.5, 'drill');
+    G.drill.anchor.setTo(0.5, 0.5);
+    this.game.physics.enable(G.drill, Phaser.Physics.ARCADE);
 
     // Add score
     G.depth = 0;
@@ -79,14 +79,15 @@ GameState.prototype.update = function() {
     G.depthText.setText('Depth: ' + G.depth);
 
     // Move
-    G.drill.body.velocity.setTo(0, 0);
-    if (this.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
-        G.drill.body.velocity.x = -50;
-    } else if (this.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-        G.drill.body.velocity.x = 50;
-    } else if (this.input.keyboard.isDown(Phaser.Keyboard.DOWN)) {
-        G.drill.body.velocity.y = 50;
-    } else if (this.input.keyboard.isDown(Phaser.Keyboard.UP)) {
-        G.drill.body.velocity.y = -50;
+    if (!this.game.tweens.isTweening(G.drill)) {
+        if (this.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
+            this.game.add.tween(G.drill).to({ x: G.drill.x - G.blockWidth }, 500, Phaser.Easing.Sinusoidal.InOut, true);
+        } else if (this.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+            this.game.add.tween(G.drill).to({ x: G.drill.x + G.blockWidth }, 500, Phaser.Easing.Sinusoidal.InOut, true);
+        } else if (this.input.keyboard.isDown(Phaser.Keyboard.DOWN)) {
+            this.game.add.tween(G.drill).to({ y: G.drill.y + G.blockHeight }, 500, Phaser.Easing.Sinusoidal.InOut, true);
+        } else if (this.input.keyboard.isDown(Phaser.Keyboard.UP)) {
+            this.game.add.tween(G.drill).to({ y: G.drill.y - G.blockHeight }, 500, Phaser.Easing.Sinusoidal.InOut, true);
+        }
     }
 };
