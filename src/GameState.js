@@ -64,8 +64,11 @@ GameState.prototype.resetGame = function() {
         }
     }
 
+    // Define vertical center of screen
+    this.middle = G.blockHeight * 2.5;
+
     // Create drill
-    G.drill = this.game.add.sprite(G.blockWidth * 1.5, G.blockHeight * 2.5, 'drill');
+    G.drill = this.game.add.sprite(G.blockWidth * 1.5, this.middle, 'drill');
     G.drill.anchor.setTo(0.5, 0.5);
     this.game.physics.enable(G.drill, Phaser.Physics.ARCADE);
 
@@ -79,15 +82,21 @@ GameState.prototype.update = function() {
     G.depthText.setText('Depth: ' + G.depth);
 
     // Move
-    if (!this.game.tweens.isTweening(G.drill)) {
+    if (!this.game.tweens.isTweening(G.drill) && !this.game.tweens.isTweening(G.ground)) {
         if (this.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
             this.game.add.tween(G.drill).to({ x: G.drill.x - G.blockWidth }, 500, Phaser.Easing.Sinusoidal.InOut, true);
         } else if (this.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
             this.game.add.tween(G.drill).to({ x: G.drill.x + G.blockWidth }, 500, Phaser.Easing.Sinusoidal.InOut, true);
         } else if (this.input.keyboard.isDown(Phaser.Keyboard.DOWN)) {
-            this.game.add.tween(G.drill).to({ y: G.drill.y + G.blockHeight }, 500, Phaser.Easing.Sinusoidal.InOut, true);
-        } else if (this.input.keyboard.isDown(Phaser.Keyboard.UP)) {
+            if (G.drill.y < this.middle) {
+                this.game.add.tween(G.drill).to({ y: G.drill.y + G.blockHeight }, 500, Phaser.Easing.Sinusoidal.InOut, true);
+            } else {
+                this.game.add.tween(G.ground).to({ y: G.ground.y - G.blockHeight }, 500, Phaser.Easing.Sinusoidal.InOut, true);
+            }
+            G.depth++;
+        } else if (this.input.keyboard.isDown(Phaser.Keyboard.UP) && G.depth > 0 && G.drill.y > G.blockHeight/2) {
             this.game.add.tween(G.drill).to({ y: G.drill.y - G.blockHeight }, 500, Phaser.Easing.Sinusoidal.InOut, true);
+            G.depth--;
         }
     }
 };
