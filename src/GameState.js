@@ -129,6 +129,22 @@ GameState.prototype.update = function() {
             ground.kill();
         }
     }, this);
+
+    // Lava kills
+    G.lava.forEachAlive(function(lava) {
+        if (!lava.lethal) return;
+
+        if (this.game.math.distance(G.drill.x, G.drill.y, lava.x, lava.y) < G.blockWidth) {
+            G.drill.kill();
+            this.game.state.start('end');
+        }
+
+        G.monsters.forEachAlive(function(monster) {
+            if (this.game.math.distance(monster.x, monster.y, lava.x, lava.y) < G.blockWidth) {
+                monster.kill();
+            }
+        }, this);
+    }, this);
 };
 
 GameState.prototype.createGround = function() {

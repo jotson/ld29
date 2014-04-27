@@ -16,32 +16,34 @@ Lava.prototype.update = function() {
 
     if (this.y < this.game.camera.y - G.blockHeight) this.kill();
 
+    if (this.animations.currentFrame.index == 2) this.lethal = true;
+
     if (this.animations.getAnimation('full').isPlaying) {
-        canSpreadRight = true;
-        canSpreadLeft = true;
-        canSpreadDown = true;
+        canMoveRight = true;
+        canMoveLeft = true;
+        canMoveDown = true;
 
         G.ground.forEachAlive(function(ground) {
-            if (ground.y == this.y && ground.x == this.x + G.blockWidth) canSpreadRight = false;
-            if (ground.y == this.y && ground.x == this.x - G.blockWidth) canSpreadLeft = false;
-            if (ground.x == this.x && ground.y == this.y + G.blockHeight) canSpreadDown = false;
+            if (ground.y == this.y && ground.x == this.x + G.blockWidth) canMoveRight = false;
+            if (ground.y == this.y && ground.x == this.x - G.blockWidth) canMoveLeft = false;
+            if (ground.x == this.x && ground.y == this.y + G.blockHeight) canMoveDown = false;
         }, this);
 
         G.lava.forEachAlive(function(lava) {
-            if (lava.y == this.y && lava.x == this.x + G.blockWidth) canSpreadRight = false;
-            if (lava.y == this.y && lava.x == this.x - G.blockWidth) canSpreadLeft = false;
-            if (lava.x == this.x && lava.y == this.y + G.blockHeight) canSpreadDown = false;
+            if (lava.y == this.y && lava.x == this.x + G.blockWidth) canMoveRight = false;
+            if (lava.y == this.y && lava.x == this.x - G.blockWidth) canMoveLeft = false;
+            if (lava.x == this.x && lava.y == this.y + G.blockHeight) canMoveDown = false;
         }, this);
 
-        if (canSpreadRight && this.x < this.game.width - G.blockWidth/2) {
+        if (canMoveRight && this.x < this.game.width - G.blockWidth/2) {
             Lava.create(this.game, this.x + G.blockWidth, this.y);
         }
 
-        if (canSpreadLeft && this.x > G.blockWidth/2) {
+        if (canMoveLeft && this.x > G.blockWidth/2) {
             Lava.create(this.game, this.x - G.blockWidth, this.y);
         }
 
-        if (canSpreadDown && this.y < this.game.camera.y + this.game.camera.height) {
+        if (canMoveDown && this.y < this.game.camera.y + this.game.camera.height) {
             Lava.create(this.game, this.x, this.y + G.blockHeight);
         }
     }
@@ -53,6 +55,7 @@ Lava.create = function(game, x, y) {
         lava = G.lava.add(new Lava(game, x, y));
     }
     lava.reset(x, y);
+    lava.lethal = false;
     lava.revive();
     lava.animations.stop();
     lava.animations.play('filling');
