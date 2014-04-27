@@ -8,9 +8,6 @@ var G = {
 
     sfx: {}, /* sound effects */
 
-    message: null,
-    tutorial: {},
-
     depth: 0,
 
     backgroundColor: 0x4488cc,
@@ -50,13 +47,6 @@ G.fadeOut = function(length, color, delay) {
     var curtain = G.addRectangle(color);
     curtain.alpha = 0;
     G.game.add.tween(curtain).to({ alpha: 1 }, length, Phaser.Easing.Quadratic.In, true, delay);
-};
-
-G.showTutorial = function(flag, message) {
-    if (G.tutorial[flag] === undefined && G.message.getQueueLength() === 0) {
-        G.tutorial[flag] = true;
-        G.message.add(message);
-    }
 };
 
 G.shake = function() {

@@ -33,6 +33,8 @@ PreloadState.prototype.preload = function() {
     // Load assets
     this.game.load.spritesheet('ground', 'assets/gfx/ground.png', 64, 64);
     this.game.load.spritesheet('drill', 'assets/gfx/drill.png', 64, 64);
+    this.game.load.spritesheet('lava', 'assets/gfx/lava.png', 64, 64);
+    this.game.load.spritesheet('monster', 'assets/gfx/monster.png', 64, 64);
 };
 
 PreloadState.prototype.create = function() {

@@ -135,6 +135,8 @@ GameState.prototype.createGround = function() {
     G.groundDepth = this.middle + G.blockHeight;
 
     G.ground = this.game.add.group();
+    G.lava = this.game.add.group();
+    G.monsters = this.game.add.group();
 
     this.addMoreGround();
 };
@@ -145,18 +147,33 @@ GameState.prototype.addMoreGround = function() {
     var x, y;
     for(x = G.blockWidth * 0.5; x < this.game.width; x += G.blockWidth) {
         for(y = G.groundDepth; y < G.groundDepth + G.blockHeight * 5; y += G.blockHeight) {
-            var ground = G.ground.getFirstDead();
-            if (ground === null) {
-                ground = this.game.add.sprite(x, y, 'ground', 0, G.ground);
-                ground.anchor.setTo(0.5, 0.5);
-                var animation = ground.animations.add('crush', [0,1,2,3], 20, false);
-                animation.killOnComplete = true;
+            var obstacleChance = this.game.math.chanceRoll(10);
+            if (obstacleChance) {
+                // Randomly place obstacles based on depth
+                var lavaChance = this.game.math.chanceRoll(50);
+                if (lavaChance) {
+                    // Place lava
+                    Lava.create(this.game, x, y);
+                } else {
+                    // Place monster
+                    Monster.create(this.game, x, y);
+                }
+            } else {
+                // Place ground
+                var ground = G.ground.getFirstDead();
+                if (ground === null) {
+                    ground = this.game.add.sprite(x, y, 'ground', 0, G.ground);
+                    ground.anchor.setTo(0.5, 0.5);
+                    var animation = ground.animations.add('crush', [0,1,2,3], 20, false);
+                    animation.killOnComplete = true;
+                }
+                ground.reset(x, y);
+                ground.frame = 0;
+                ground.alpha = 1;
+                ground.revive();
             }
-            ground.reset(x, y);
-            ground.frame = 0;
-            ground.alpha = 1;
-            ground.revive();
         }
     }
+
     G.groundDepth = y;
 };
