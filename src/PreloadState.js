@@ -39,11 +39,6 @@ PreloadState.prototype.preload = function() {
 
 PreloadState.prototype.create = function() {
     this.game.stage.backgroundColor = G.backgroundColor;
-    // Setup sound effects
-    // G.sfx.music = this.game.add.sound('music', 0.3, true);
-    // G.sfx.music.play();
-
-    // G.sfx.boom = this.game.add.sound('boom', 1.0);
 
     // Delay to allow web fonts to load
     G.fadeOut(1000, G.backgroundColor);

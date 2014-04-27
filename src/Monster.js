@@ -74,7 +74,6 @@ Monster.prototype.update = function() {
 
         if (moved) {
             if (this.firstMove) {
-                // TODO Roar
             }
             this.firstMove = false;
         }

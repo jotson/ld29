@@ -16,9 +16,8 @@ Lava.prototype.update = function() {
 
     if (this.y < this.game.camera.y - G.blockHeight) this.kill();
 
-    if (this.animations.currentFrame.index == 2) this.lethal = true;
-
     if (this.animations.getAnimation('full').isPlaying) {
+        this.lethal = true;
         canMoveRight = true;
         canMoveLeft = true;
         canMoveDown = true;

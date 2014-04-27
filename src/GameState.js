@@ -136,7 +136,7 @@ GameState.prototype.update = function() {
     G.lava.forEachAlive(function(lava) {
         if (!lava.lethal) return;
 
-        if (this.game.math.distance(G.drill.x, G.drill.y, lava.x, lava.y) < G.blockWidth) {
+        if (this.game.math.distance(G.drill.x, G.drill.y, lava.x, lava.y) < G.blockWidth/2) {
             G.drill.kill();
             this.game.time.events.add(200, function() { this.game.state.start('end'); }, this);
         }
@@ -150,7 +150,7 @@ GameState.prototype.update = function() {
 
     // Monsters kill
     G.monsters.forEachAlive(function(monster) {
-        if (this.game.math.distance(G.drill.x, G.drill.y, monster.x, monster.y) < G.blockWidth) {
+        if (this.game.math.distance(G.drill.x, G.drill.y, monster.x, monster.y) < G.blockWidth/2) {
             G.drill.kill();
             this.game.time.events.add(200, function() { this.game.state.start('end'); }, this);
         }
