@@ -173,7 +173,8 @@ GameState.prototype.addMoreGround = function() {
     var x, y;
     for(x = G.blockWidth * 0.5; x < this.game.width; x += G.blockWidth) {
         for(y = G.groundDepth; y < G.groundDepth + G.blockHeight * 5; y += G.blockHeight) {
-            var obstacleChance = this.game.math.chanceRoll(10);
+            var difficulty = 50 * this.game.camera.y/(this.game.world.height * 0.8);
+            var obstacleChance = this.game.math.chanceRoll(10 + difficulty);
             if (obstacleChance && y > G.groundDepth) {
                 // Randomly place obstacles based on depth
                 var lavaChance = this.game.math.chanceRoll(50);

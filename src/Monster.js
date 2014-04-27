@@ -54,14 +54,29 @@ Monster.prototype.update = function() {
             canMoveLeft = false;
         }
 
+        var moved = false;
+        var delay = G.monsterStepDelay;
+        if (this.firstMove) delay += G.monsterWakeupDelay;
+
         if (canMoveRight && this.x < this.game.width - G.blockWidth/2) {
-            this.game.add.tween(this).to({ x: this.x + G.blockWidth }, G.monsterMoveSpeed, Phaser.Easing.Sinusoidal.InOut, true, G.monsterStepDelay);
+            this.game.add.tween(this).to({ x: this.x + G.blockWidth }, G.monsterMoveSpeed, Phaser.Easing.Sinusoidal.InOut, true, delay);
+            moved = true;
         } else if (canMoveLeft && this.x > G.blockWidth/2) {
-            this.game.add.tween(this).to({ x: this.x - G.blockWidth }, G.monsterMoveSpeed, Phaser.Easing.Sinusoidal.InOut, true, G.monsterStepDelay);
+            this.game.add.tween(this).to({ x: this.x - G.blockWidth }, G.monsterMoveSpeed, Phaser.Easing.Sinusoidal.InOut, true, delay);
+            moved = true;
         } else if (canMoveDown && this.y < this.game.camera.y + this.game.camera.height) {
-            this.game.add.tween(this).to({ y: this.y + G.blockHeight }, G.monsterMoveSpeed, Phaser.Easing.Sinusoidal.InOut, true, G.monsterStepDelay);
+            this.game.add.tween(this).to({ y: this.y + G.blockHeight }, G.monsterMoveSpeed, Phaser.Easing.Sinusoidal.InOut, true, delay);
+            moved = true;
         } else if (canMoveUp && this.y > this.game.camera.y) {
-            this.game.add.tween(this).to({ y: this.y - G.blockHeight }, G.monsterMoveSpeed, Phaser.Easing.Sinusoidal.InOut, true, G.monsterStepDelay);
+            this.game.add.tween(this).to({ y: this.y - G.blockHeight }, G.monsterMoveSpeed, Phaser.Easing.Sinusoidal.InOut, true, delay);
+            moved = true;
+        }
+
+        if (moved) {
+            if (this.firstMove) {
+                // TODO Roar
+            }
+            this.firstMove = false;
         }
     }
 };
@@ -74,6 +89,7 @@ Monster.create = function(game, x, y) {
     }
     monster.reset(x, y);
     monster.revive();
+    monster.firstMove = true;
     monster.animations.play('default');
 
     return monster;

@@ -8,6 +8,7 @@ var G = {
 
     drillMoveSpeed: 200,
 
+    monsterWakeupDelay: 500,
     monsterStepDelay: 200,
     monsterMoveSpeed: 200,
 
