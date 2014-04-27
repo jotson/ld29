@@ -15,6 +15,12 @@ BootState.prototype.create = function() {
 
     }
 
+    this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    this.game.scale.maxWidth = G.width;
+    this.game.scale.maxHeight = G.height;
+    this.game.scale.pageAlignHorizontally = true;
+    this.game.scale.pageAlignVertically = true;
+    this.game.scale.setScreenSize();
     this.game.stage.backgroundColor = G.backgroundColor;
 
     // This triggers web fonts to start loading. They'll finish loading during the PreloadState.

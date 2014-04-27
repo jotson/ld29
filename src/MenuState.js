@@ -17,7 +17,7 @@ MenuState.prototype.addTitles = function() {
     var tweenTime = 750;
     var delayIncrement = 100;
 
-    t = this.game.add.text(0, -100, 'GAME TITLE', { font: '48px ' + G.mainFont, fill: '#ffffff' });
+    t = this.game.add.text(0, -100, 'Infinite Dig Dug', { font: '48px ' + G.mainFont, fill: '#ffffff' });
     t.updateTransform();
     t.x = this.game.width/2 - t.getBounds().width/2;
     t.alpha = 0;
