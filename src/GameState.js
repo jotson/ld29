@@ -96,39 +96,41 @@ GameState.prototype.update = function() {
     // Move
     if (!this.game.tweens.isTweening(G.drill)) {
         if (this.input.keyboard.isDown(Phaser.Keyboard.LEFT) && G.drill.x > G.blockWidth/2) {
-            this.game.add.tween(G.drill).to({ x: G.drill.x - G.blockWidth }, 200, Phaser.Easing.Sinusoidal.InOut, true);
+            this.game.add.tween(G.drill).to({ x: G.drill.x - G.blockWidth }, G.drillMoveSpeed, Phaser.Easing.Sinusoidal.InOut, true);
             G.drill.animations.play('left');
         } else if (this.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && G.drill.x < this.game.width - G.blockWidth/2) {
-            this.game.add.tween(G.drill).to({ x: G.drill.x + G.blockWidth }, 200, Phaser.Easing.Sinusoidal.InOut, true);
+            this.game.add.tween(G.drill).to({ x: G.drill.x + G.blockWidth }, G.drillMoveSpeed, Phaser.Easing.Sinusoidal.InOut, true);
             G.drill.animations.play('right');
         } else if (this.input.keyboard.isDown(Phaser.Keyboard.DOWN)) {
-            this.game.add.tween(G.drill).to({ y: G.drill.y + G.blockHeight }, 200, Phaser.Easing.Sinusoidal.InOut, true);
+            this.game.add.tween(G.drill).to({ y: G.drill.y + G.blockHeight }, G.drillMoveSpeed, Phaser.Easing.Sinusoidal.InOut, true);
             this.addMoreGround();
             if (G.drill.y >= this.game.camera.y + this.middle) {
-                this.game.add.tween(this.game.camera).to({ y: this.game.camera.y + G.blockHeight }, 200, Phaser.Easing.Sinusoidal.InOut, true);
+                this.game.add.tween(this.game.camera).to({ y: this.game.camera.y + G.blockHeight }, G.drillMoveSpeed, Phaser.Easing.Sinusoidal.InOut, true);
             }
             G.drill.animations.play('down');
             G.depth++;
         } else if (this.input.keyboard.isDown(Phaser.Keyboard.UP) && G.depth > 0 && G.drill.y > this.game.camera.y + G.blockHeight/2) {
-            this.game.add.tween(G.drill).to({ y: G.drill.y - G.blockHeight }, 200, Phaser.Easing.Sinusoidal.InOut, true);
+            this.game.add.tween(G.drill).to({ y: G.drill.y - G.blockHeight }, G.drillMoveSpeed, Phaser.Easing.Sinusoidal.InOut, true);
             G.drill.animations.play('up');
             G.depth--;
         }
     }
 
     // Dig
-    G.ground.forEachAlive(function(ground) {
-        if (this.game.math.distance(G.drill.x, G.drill.y, ground.x, ground.y) < G.blockWidth) {
-            if (!ground.animations.getAnimation('crush').isPlaying) {
-                ground.tween = this.game.add.tween(ground).to({ alpha: 0 }, 180, Phaser.Easing.Cubic.In, true);
-                ground.animations.play('crush');
+    if (G.drill.alive) {
+        G.ground.forEachAlive(function(ground) {
+            if (this.game.math.distance(G.drill.x, G.drill.y, ground.x, ground.y) < G.blockWidth) {
+                if (!ground.animations.getAnimation('crush').isPlaying) {
+                    ground.tween = this.game.add.tween(ground).to({ alpha: 0 }, 180, Phaser.Easing.Cubic.In, true);
+                    ground.animations.play('crush');
+                }
             }
-        }
 
-        if (ground.y < this.game.camera.y - G.blockHeight) {
-            ground.kill();
-        }
-    }, this);
+            if (ground.y < this.game.camera.y - G.blockHeight) {
+                ground.kill();
+            }
+        }, this);
+    }
 
     // Lava kills
     G.lava.forEachAlive(function(lava) {
@@ -172,7 +174,7 @@ GameState.prototype.addMoreGround = function() {
     for(x = G.blockWidth * 0.5; x < this.game.width; x += G.blockWidth) {
         for(y = G.groundDepth; y < G.groundDepth + G.blockHeight * 5; y += G.blockHeight) {
             var obstacleChance = this.game.math.chanceRoll(10);
-            if (obstacleChance) {
+            if (obstacleChance && y > G.groundDepth) {
                 // Randomly place obstacles based on depth
                 var lavaChance = this.game.math.chanceRoll(50);
                 if (lavaChance) {

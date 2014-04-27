@@ -6,6 +6,11 @@ var G = {
     blockHeight: 64,
     blockWidth: 64,
 
+    drillMoveSpeed: 200,
+
+    monsterStepDelay: 200,
+    monsterMoveSpeed: 200,
+
     sfx: {}, /* sound effects */
 
     depth: 0,
