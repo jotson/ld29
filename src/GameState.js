@@ -136,7 +136,7 @@ GameState.prototype.update = function() {
 
         if (this.game.math.distance(G.drill.x, G.drill.y, lava.x, lava.y) < G.blockWidth) {
             G.drill.kill();
-            this.game.state.start('end');
+            this.game.time.events.add(200, function() { this.game.state.start('end'); }, this);
         }
 
         G.monsters.forEachAlive(function(monster) {
@@ -144,6 +144,14 @@ GameState.prototype.update = function() {
                 monster.kill();
             }
         }, this);
+    }, this);
+
+    // Monsters kill
+    G.monsters.forEachAlive(function(monster) {
+        if (this.game.math.distance(G.drill.x, G.drill.y, monster.x, monster.y) < G.blockWidth) {
+            G.drill.kill();
+            this.game.time.events.add(200, function() { this.game.state.start('end'); }, this);
+        }
     }, this);
 };
 
