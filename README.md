@@ -3,3 +3,5 @@ This game sketch was made in about 10 hours for the Ludum Dare 29 game jam on Ap
 The world is 1000 tiles deep. The difficulty increases the deeper you go (more monsters and magma).
 
 [You can play it online here.](http://jotson.itch.io/ld29)
+
+[Ludum Dare Entry/Vote for me here](http://www.ludumdare.com/compo/ludum-dare-29/?action=preview&uid=20128)
