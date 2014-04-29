@@ -6,6 +6,14 @@ GameState.prototype.create = function() {
     G.setupStage();
 
     this.resetGame();
+
+    this.game.input.keyboard.addKeyCapture([
+        Phaser.Keyboard.LEFT,
+        Phaser.Keyboard.RIGHT,
+        Phaser.Keyboard.UP,
+        Phaser.Keyboard.DOWN,
+        Phaser.Keyboard.SPACEBAR
+    ]);
 };
 
 GameState.prototype.resetGame = function() {
